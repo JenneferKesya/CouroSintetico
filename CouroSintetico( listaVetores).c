@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define TAM 5
 
 typedef struct{
@@ -133,16 +132,16 @@ int atualizarElemento(Lista *lista, int produto, int materiaPrima, int cor, floa
     }
 
     for(i = 0; i < lista->id; ++i){
-        if(lista->Produto[i] == produto){
+        if( i == produto){
             lista->MateriaPrima[i] = materiaPrima;
-            lista->Cor[i] = cor; 
-            lista->Metros[i] = metros;
-            lista->Diametro[i] = diametro;
-            lista->Preco[i] = preco; // Atualiza o preço
+            lista->Cor[i] = cor;
+            lista->Metros[i] = metros; 
+            lista->Diametro[i] = diametro; 
+            lista->Preco[i] = preco; 
             return 1;
         }
     }
-    printf("Produto nao encontrado na lista\n");
+
     return 0; 
 }
 
@@ -162,7 +161,7 @@ int inserirElementoID(Lista *lista, int produto, int cor){
             lista->Cor[produto] = cor;
             
         }else{
-            printf("Posicao fora o intervalo permitido\n");
+            printf("Posicao desconhecida\n");
         }
     }else{
         printf("Espaco esgotado\n");
@@ -189,7 +188,7 @@ void imprimirElementos(Lista *lista){
 					printf("Couro de Cacto\n");
 					break;
 				case 2:
-					printf("Couro de Maçã\n");
+					printf("Couro de Maca\n");
 					break;
 				case 3:
 					printf("Couro de Cogumelo\n");
@@ -264,12 +263,12 @@ int main(){
 	            printf("\n");
 	            
 				printf("[2]Couro de Maca\n");	
-	            printf("Descricao: Produzido a partir de resíduos da indústria de suco de maçã.\n");
+	            printf("Descricao: Produzido a partir de residuos da industria de suco de maca.\n");
 	            printf("Preco: R$ 200 por 1,50 m\n");
 	            printf("\n");
 	            
 				printf("[3]Couro de Cogumelo\n");
-	            printf("Descricao: Feito a partir do micélio dos cogumelos.\n");
+	            printf("Descricao: Feito a partir do mic�lio dos cogumelos.\n");
 	            printf("Preco: R$ 350 por 1,50 m\n");
 	            printf("\n");
 	            
@@ -278,7 +277,7 @@ int main(){
 	            printf("Preco: R$ 150 por 1,50 m\n");
 	            printf("\n");
 	            
-	            printf("Digite o numero do produto que vc quer: ");
+	            printf("Digite o numero do produto que voce quer: ");
 	            scanf("%d", &materialPrima);
 	            printf("\n");
 	            getchar();
@@ -328,6 +327,7 @@ int main(){
    				printf("---------------- Nota Fiscal ----------------\n");
 	    		printf("\n");
 				imprimirElementos(lista);
+				printf("Total de Produtos: %d\n" , lista->id);
 				printf("Total da Compra: %.2f" , totPreco);
 				printf("\n"); 
 	              
@@ -335,15 +335,17 @@ int main(){
 				printf("\n");
 				printf("---------------- Excluir Produto ----------------\n");
 				printf("\n");
-				printf("Qual item vc deseja excluir: ");
+				printf("Qual item voce deseja excluir: ");
 				scanf("%d" , &produto);
 				printf("\n");
 				
 				removerElemento( lista , produto);
+				totPreco -= preco;
 				
 		    	printf("---------------- Nota Fiscal ----------------\n");
 	    		printf("\n");
 				imprimirElementos(lista);
+				printf("Total de Produtos: %d\n" , lista->id);
 				printf("Total da Compra: %.2f" , totPreco);
 				printf("\n");
 				
@@ -357,12 +359,12 @@ int main(){
 	            printf("\n");
 	            
 				printf("[2]Couro de Maca\n");	
-	            printf("Descricao: Produzido a partir de resíduos da indústria de suco de maçã.\n");
+	            printf("Descricao: Produzido a partir de residuos da ind�stria de suco de maca.\n");
 	            printf("Preco: R$ 200 por 1,50 m\n");
 	            printf("\n");
 	            
 				printf("[3]Couro de Cogumelo\n");
-	            printf("Descricao: Feito a partir do micélio dos cogumelos.\n");
+	            printf("Descricao: Feito a partir do micelio dos cogumelos.\n");
 	            printf("Preco: R$ 350 por 1,50 m\n");
 	            printf("\n");
 	            
@@ -371,7 +373,7 @@ int main(){
 	            printf("Preco: R$ 150 por 1,50 m\n");
 	            printf("\n");
 	            
-	            printf("Digite o numero do produto que vc quer: ");
+	            printf("Digite o numero do produto que voce quer: ");
 	            scanf("%d", &materialPrima);
 	            printf("\n");
 	            getchar();
@@ -416,11 +418,13 @@ int main(){
 					printf("Preco: %.2f\n", preco);  
 				  }	
 	
-	           inserirElementoInicio(lista , produto , materialPrima, cor, metros, diametro, preco); 
+	           inserirElementoInicio(lista , produto , materialPrima, cor, metros, diametro, preco);
+			   totPreco += preco; 
 	           
    	    		printf("---------------- Nota Fiscal ----------------\n");
 		    	printf("\n");
 				imprimirElementos(lista);
+				printf("Total de Produtos: %d\n" , lista->id);
 				printf("Total da Compra: %.2f" , totPreco);
 				printf("\n");
 	            
@@ -428,7 +432,7 @@ int main(){
 				printf("\n");
 				printf("---------------- Atualizar Produto ----------------\n");
 				printf("\n");
-				printf("Qual elemento voce deseja atualizar: ");
+				printf("Qual Produto voce deseja atualizar: ");
 				scanf("%d" , &produto);
 				
 				printf("\n");
@@ -440,12 +444,12 @@ int main(){
 	            printf("\n");
 	            
 				printf("[2]Couro de Maca\n");	
-	            printf("Descricao: Produzido a partir de resíduos da indústria de suco de maçã.\n");
+	            printf("Descricao: Produzido a partir de residuos da industria de suco de maca.\n");
 	            printf("Preco: R$ 200 por 1,50 m\n");
 	            printf("\n");
 	            
 				printf("[3]Couro de Cogumelo\n");
-	            printf("Descricao: Feito a partir do micélio dos cogumelos.\n");
+	            printf("Descricao: Feito a partir do micelio dos cogumelos.\n");
 	            printf("Preco: R$ 350 por 1,50 m\n");
 	            printf("\n");
 	            
@@ -454,7 +458,7 @@ int main(){
 	            printf("Preco: R$ 150 por 1,50 m\n");
 	            printf("\n");
 	            
-	            printf("Digite o numero do produto que vc quer: ");
+	            printf("Digite o numero do produto que voce quer: ");
 	            scanf("%d", &materialPrima);
 	            printf("\n");
 	            getchar();
@@ -499,13 +503,19 @@ int main(){
 					printf("Preco: %.2f\n", preco);  
 				  }	
 	
-				  atualizarElemento(lista , produto , materialPrima, cor, metros, diametro, preco);
+				atualizarElemento(lista , produto , materialPrima, cor, metros, diametro, preco);
+				totPreco += preco;
 				  
 	    		printf("---------------- Nota Fiscal ----------------\n");
 		    	printf("\n");
 				imprimirElementos(lista);
+				printf("Total de Produtos: %d\n" , lista->id);
 				printf("Total da Compra: %.2f" , totPreco);
 				printf("\n");
+				
+				printf("Devido a problemas no codigo, o programa sera encerrado");
+				printf("\n");
+				break;
 	          
 			}else if (opcao == 5){
 				printf("\n");
@@ -532,6 +542,7 @@ int main(){
    				printf("---------------- Nota Fiscal ----------------\n");
 	    		printf("\n");
 				imprimirElementos(lista);
+				printf("Total de Produtos: %d\n" , lista->id);
 				printf("Total da Compra: %.2f" , totPreco);
 				printf("\n"); 
 	        
@@ -552,12 +563,13 @@ int main(){
 					}
 					
 				}else{
-					printf("A lista nao foi excluida\n");
+					printf("A lista de pedidos nao foi excluida\n");
 					printf("\n");
 					
 	    			printf("---------------- Nota Fiscal ----------------\n");
 			    	printf("\n");
 					imprimirElementos(lista);
+					printf("Total de Produtos: %d\n" , lista->id);
 					printf("Total da Compra: %.2f" , totPreco);
 					printf("\n");
 				
@@ -572,8 +584,9 @@ int main(){
 
 }else {
 	printf("A lista nao existe");
-}	
 	
+}	
     
     return 0;
 }
+
